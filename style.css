@@ -6,10 +6,10 @@ img { max-width: 100%; border-radius: 0.5em; }
 
 /* FROSTED GLASS NAV BAR + GLOW ON HOVER */
 nav {
-  background: rgba(27, 32, 39, 0.75); /* semi-transparent dark */
-  backdrop-filter: blur(10px); /* frosted glass blur */
-  -webkit-backdrop-filter: blur(10px); /* Safari */
-  box-shadow: 0 0 15px rgba(19, 162, 239, 0.4); /* subtle blue glow */
+  background: rgba(27, 32, 39, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(19, 162, 239, 0.4);
   display: flex; justify-content: space-between;
   align-items: center; padding: 1em 2em;
   position: sticky; top: 0; z-index:100;
@@ -60,14 +60,17 @@ h2 {
   color: #13a2ef; margin-bottom: 1em;
   font-size: 2em; border-bottom: 2px solid #2c6f99; display: inline-block;
 }
-/* Remove underline only from specific headings if needed
-   For no underline on all headings, remove 'border-bottom' above */
 
 .portfolio-grid {
-  display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));  /* smaller thumbnails */
+  gap: 2em;
 }
 .portfolio-item { position: relative; }
-.portfolio-item img { transition: filter 0.2s; }
+.portfolio-item img {
+  max-width: 220px;   /* ensures image is never too large */
+  transition: filter 0.2s;
+}
 .portfolio-item:hover img { filter: blur(2px) brightness(0.7); }
 .portfolio-item .overlay {
   position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -125,15 +128,3 @@ footer a {
   .testimonials { flex-direction: column; gap: 1em; }
   header h1 { font-size: 1.5em; }
 }
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));  /* was 250px */
-  gap: 2em;
-}
-
-.portfolio-item img {
-  max-width: 220px;                        /* NEW: ensures image is never too large */
-  transition: filter 0.2s;
-}
-
