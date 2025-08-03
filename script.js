@@ -5,6 +5,8 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
   // Integrate with an email API or Google Forms for real submission.
   this.reset();
 });
+
+// THREE.js 3D Animation
 window.addEventListener('DOMContentLoaded', () => {
   // Find the 3D container
   const container = document.getElementById('threejs-canvas');
