@@ -79,16 +79,6 @@ footer {
   header h1 { font-size: 1.5em; }
 }
 
-/* 3D Animation Section */
-#three-d-animation {
-  margin: 3em 0;
-  text-align: center;
-}
-#threejs-canvas {
-  margin: 0 auto;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px #13a2ef33;
-}
 
 /* Remove all link underlines, for every state */
 a,
