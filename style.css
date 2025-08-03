@@ -125,3 +125,15 @@ footer a {
   .testimonials { flex-direction: column; gap: 1em; }
   header h1 { font-size: 1.5em; }
 }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));  /* was 250px */
+  gap: 2em;
+}
+
+.portfolio-item img {
+  max-width: 220px;                        /* NEW: ensures image is never too large */
+  transition: filter 0.2s;
+}
+
