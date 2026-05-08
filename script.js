@@ -158,6 +158,36 @@ let cursorY = window.innerHeight / 2;
 let targetX = cursorX;
 let targetY = cursorY;
 
+// State helpers so classes don't stack weirdly
+function setCursorDefault() {
+  customCursor.classList.remove('cursor-link', 'cursor-text');
+}
+
+function setCursorLink() {
+  customCursor.classList.add('cursor-link');
+  customCursor.classList.remove('cursor-text');
+}
+
+function setCursorText() {
+  customCursor.classList.add('cursor-text');
+  customCursor.classList.remove('cursor-link');
+}
+
+// Clickable things: links, buttons, portfolio cards
+const clickableEls = document.querySelectorAll('a, button, .portfolio-item, .submit-btn');
+clickableEls.forEach(el => {
+  el.addEventListener('mouseenter', setCursorLink);
+  el.addEventListener('mouseleave', setCursorDefault);
+});
+
+// Text inputs: input + textarea
+const textEls = document.querySelectorAll('input, textarea');
+textEls.forEach(el => {
+  el.addEventListener('mouseenter', setCursorText);
+  el.addEventListener('mouseleave', setCursorDefault);
+});
+
+// existing move / mousedown / mouseup / renderCursor stay the same
 window.addEventListener('mousemove', (e) => {
   targetX = e.clientX;
   targetY = e.clientY;
