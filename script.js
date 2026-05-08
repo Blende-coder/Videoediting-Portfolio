@@ -36,39 +36,6 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
   // Auto-hide after 3.8 seconds
   setTimeout(() => toast.classList.remove('show'), 3800);
 
-  // ── Custom gold cursor ─────────────────────────────────────
-const customCursor = document.createElement('div');
-customCursor.className = 'custom-cursor';
-document.body.appendChild(customCursor);
-
-let cursorX = window.innerWidth / 2;
-let cursorY = window.innerHeight / 2;
-let targetX = cursorX;
-let targetY = cursorY;
-
-window.addEventListener('mousemove', (e) => {
-  targetX = e.clientX;
-  targetY = e.clientY;
-});
-
-window.addEventListener('mousedown', () => {
-  customCursor.classList.add('active');
-});
-
-window.addEventListener('mouseup', () => {
-  customCursor.classList.remove('active');
-});
-
-function renderCursor() {
-  const lerpFactor = 0.22;
-  cursorX += (targetX - cursorX) * lerpFactor;
-  cursorY += (targetY - cursorY) * lerpFactor;
-  customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
-  requestAnimationFrame(renderCursor);
-}
-
-renderCursor();
-
 // ── Hero floating particles ────────────────────────────────
 const heroCanvas = document.getElementById('hero-canvas');
 
@@ -172,3 +139,37 @@ if (statNumbers.length) {
   
   this.reset();
 });
+
+// ── Custom gold cursor ─────────────────────────────────────
+const customCursor = document.createElement('div');
+customCursor.className = 'custom-cursor';
+document.body.appendChild(customCursor);
+
+let cursorX = window.innerWidth / 2;
+let cursorY = window.innerHeight / 2;
+let targetX = cursorX;
+let targetY = cursorY;
+
+window.addEventListener('mousemove', (e) => {
+  targetX = e.clientX;
+  targetY = e.clientY;
+});
+
+window.addEventListener('mousedown', () => {
+  customCursor.classList.add('active');
+});
+
+window.addEventListener('mouseup', () => {
+  customCursor.classList.remove('active');
+});
+
+function renderCursor() {
+  const lerpFactor = 0.22;
+  cursorX += (targetX - cursorX) * lerpFactor;
+  cursorY += (targetY - cursorY) * lerpFactor;
+  customCursor.style.transform =
+    `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+  requestAnimationFrame(renderCursor);
+}
+
+renderCursor();
