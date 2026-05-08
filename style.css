@@ -1,5 +1,5 @@
 /* ── CUSTOM CURSOR ───────────────────────────────────────── */
-body {
+body.has-custom-cursor {
   cursor: none;
 }
 
