@@ -27,14 +27,20 @@ window.addEventListener('scroll', () => {
 
 // ── Contact form submission ─────────────────────────────────
 // Shows a toast notification instead of a jarring alert()
-document.getElementById('contact-form').addEventListener('submit', function (e) {
+const contactForm = document.getElementById('contact-form');
+const toast = document.getElementById('toast');
+
+contactForm.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const toast = document.getElementById('toast');
   toast.classList.add('show');
 
   // Auto-hide after 3.8 seconds
   setTimeout(() => toast.classList.remove('show'), 3800);
+
+  contactForm.reset();
+});
+
 
 // ── Hero floating particles ────────────────────────────────
 const heroCanvas = document.getElementById('hero-canvas');
@@ -102,6 +108,7 @@ if (heroCanvas) {
   tick();
 }
 
+
 // ── Stat counters ──────────────────────────────────────────
 const statNumbers = document.querySelectorAll('.stat-number');
 
@@ -136,14 +143,15 @@ if (statNumbers.length) {
 
   statNumbers.forEach(num => statsObserver.observe(num));
 }
-  
-  this.reset();
-});
+
 
 // ── Custom gold cursor ─────────────────────────────────────
 const customCursor = document.createElement('div');
 customCursor.className = 'custom-cursor';
 document.body.appendChild(customCursor);
+
+// tell CSS it's safe to hide the native cursor
+document.body.classList.add('has-custom-cursor');
 
 let cursorX = window.innerWidth / 2;
 let cursorY = window.innerHeight / 2;
