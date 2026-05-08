@@ -13,9 +13,14 @@ body {
   border: 1px solid var(--gold);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: transform 0.08s ease-out, width 0.12s ease, height 0.12s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: 
+    transform 0.08s ease-out, 
+    width 0.12s ease, 
+    height 0.12s ease, 
+    border-color 0.15s ease, 
+    background 0.15s ease;
   mix-blend-mode: difference;
-  z-index: 9998;
+  z-index: 10000;
 }
 
 .custom-cursor.active {
