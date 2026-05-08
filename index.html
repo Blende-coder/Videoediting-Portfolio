@@ -3,101 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ankush Mallick | Video Editor Portfolio</title>
+  <title>Ankush Mallick | Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- NAV -->
   <nav>
-    <div class="logo">BL</div>
+    <div class="logo">AM</div>
     <ul>
       <li><a href="#about">About</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
+  <!-- HERO -->
   <header>
-    <h1>Hello, I'm <span>Ankush Mallick</span></h1>
-    <p class="subtitle">Professional Video Editor & Storyteller</p>
-    <a href="#portfolio" class="button">See My Work</a>
+    <p class="hero-tag">Video Editor & Storyteller</p>
+    <h1>Ankush<br><span>Mallick</span></h1>
+    <p class="hero-subtitle">
+      Crafting visual narratives that move people — for brands, creators &amp; campaigns.
+    </p>
+    <a href="#portfolio" class="hero-cta">See My Work</a>
+    <div class="scroll-hint">
+      <span></span>
+      Scroll
+    </div>
   </header>
 
+  <!-- ABOUT -->
   <section id="about">
-    <h2>About Me</h2>
+    <p class="section-label reveal">About</p>
+    <h2 class="reveal reveal-delay-1">The Editor<br>Behind the Frame</h2>
+
     <div class="about-container">
-      <img src="assets/profile.jpg" alt="Your Portrait" style="width:250px;height:250px;">
-      <p>
-        I am a passionate video editor with 1 years experience in commercials, YouTube, and social media. Skilled with Adobe Premiere Pro, After Effects and DaVinci Resolve. I help brands and creators bring their stories to life.<br><br>
-        <b>Let's collaborate!</b>
-      </p>
+      <div class="about-img-wrap reveal reveal-delay-1">
+        <img src="assets/profile.jpg" alt="Ankush Mallick — Video Editor">
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <p>
+          I'm <strong>Ankush Mallick</strong>, a video editor based in India with a year of
+          hands-on experience crafting content for commercials, YouTube channels, and social
+          media campaigns.
+        </p>
+        <p>
+          My workflow spans the full post-production pipeline — from rough cuts and colour
+          grading to motion graphics and final delivery. Every frame is a creative decision.
+        </p>
+        <p>
+          I believe great editing is invisible. It pulls the viewer forward without them
+          noticing — until the feeling hits. <strong>Let's build that feeling together.</strong>
+        </p>
+        <div class="skills-row">
+          <span class="skill-tag">Premiere Pro</span>
+          <span class="skill-tag">After Effects</span>
+          <span class="skill-tag">DaVinci Resolve</span>
+          <span class="skill-tag">Colour Grading</span>
+          <span class="skill-tag">Motion Graphics</span>
+          <span class="skill-tag">Reels / Shorts</span>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- PORTFOLIO -->
   <section id="portfolio">
-    <h2>Portfolio</h2>
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="reveal reveal-delay-1">Recent<br>Projects</h2>
+
     <div class="portfolio-grid">
-      <div class="portfolio-item">
-        <img src="assets/thumb1.jpg" alt="Project Title">
+
+      <a href="https://www.instagram.com/monova.in/reel/DM2ZzKmyU5b/?hl=en"
+         target="_blank" rel="noopener" class="portfolio-item reveal reveal-delay-1">
+        <span class="film-num">01</span>
+        <img src="assets/thumb1.jpg" alt="Project 1 — Monova Reel">
         <div class="overlay">
-          <a href="https://www.instagram.com/monova.in/reel/DM2ZzKmyU5b/?hl=en" target="_blank">
-            <span>Watch</span>
-          </a>
+          <div class="overlay-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <span class="overlay-label">Watch Reel</span>
         </div>
-      </div>
-      <div class="portfolio-item">
-        <img src="assets/thumb2.jpg" alt="Project Title">
+      </a>
+
+      <a href="https://www.instagram.com/monova.in/reel/DMsV8sKS_e0/?hl=en"
+         target="_blank" rel="noopener" class="portfolio-item reveal reveal-delay-2">
+        <span class="film-num">02</span>
+        <img src="assets/thumb2.jpg" alt="Project 2 — Monova Reel">
         <div class="overlay">
-          <a href="https://www.instagram.com/monova.in/reel/DMsV8sKS_e0/?hl=en" target="_blank">
-            <span>Watch</span>
-          </a>
+          <div class="overlay-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <span class="overlay-label">Watch Reel</span>
         </div>
-      </div>
-      </div>
-      <div class="portfolio-item">
-        <img src="assets/thumb3.jpg" alt="Project Title">
+      </a>
+
+      <a href="https://www.instagram.com/monova.in/reel/DMc4Eipyegj/?hl=en"
+         target="_blank" rel="noopener" class="portfolio-item reveal reveal-delay-3">
+        <span class="film-num">03</span>
+        <img src="assets/thumb3.jpg" alt="Project 3 — Monova Reel">
         <div class="overlay">
-          <a href="https://www.instagram.com/monova.in/reel/DMc4Eipyegj/?hl=en" target="_blank">
-            <span>Watch</span>
-          </a>
+          <div class="overlay-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <span class="overlay-label">Watch Reel</span>
         </div>
-      </div>
-      <!-- Add more portfolio items as needed -->
+      </a>
+
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
   <section id="testimonials">
-    <h2>Testimonials</h2>
-    <div class="testimonials">
-      <blockquote>
-        “Working with Ankush Mallick transformed our campaign videos. Creativity at its best!”
-        <cite>– Client A, Company</cite>
+    <p class="section-label reveal">Kind Words</p>
+    <h2 class="reveal reveal-delay-1">What Clients<br>Say</h2>
+
+    <div class="testimonials-grid">
+      <blockquote class="reveal reveal-delay-1">
+        <p>"Working with Ankush transformed our campaign videos. Creativity and precision at its best!"</p>
+        <cite>— Client A, Company</cite>
       </blockquote>
-      <blockquote>
-        “Professional, fast turnaround, and amazing results every time.”
-        <cite>– Creator B</cite>
+      <blockquote class="reveal reveal-delay-2">
+        <p>"Professional, fast turnaround, and results that exceeded our expectations every single time."</p>
+        <cite>— Creator B</cite>
       </blockquote>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
-    <h2>Contact Me</h2>
-    <form id="contact-form" autocomplete="off">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Describe your project..." required></textarea>
-      <button type="submit">Send</button>
-    </form>
-    <div class="social-links">
-      <a href="https://www.instagram.com/we_are_dis/" target="_blank">Instagram</a>
-      <a href="https://linkedin.com/in/ankushmallick636" target="_blank">LinkedIn</a>
-      <a href="mailto:ankushmallick636@gmail.com">Email</a>
+    <p class="section-label reveal">Get In Touch</p>
+    <h2 class="reveal reveal-delay-1">Let's Make<br>Something Great</h2>
+
+    <div class="contact-layout">
+      <div class="contact-info reveal reveal-delay-1">
+        <h3>Open for Projects</h3>
+        <p>
+          Whether you need a brand commercial, YouTube series, or a punchy social media
+          reel — I'd love to hear about it. Drop me a message or find me on:
+        </p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/we_are_dis/" target="_blank" rel="noopener">
+            <span>↗</span> Instagram
+          </a>
+          <a href="https://linkedin.com/in/ankushmallick636" target="_blank" rel="noopener">
+            <span>↗</span> LinkedIn
+          </a>
+          <a href="mailto:ankushmallick636@gmail.com">
+            <span>↗</span> ankushmallick636@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <form id="contact-form" autocomplete="off" class="reveal reveal-delay-2">
+        <div class="form-field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Riya Sharma" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="hello@example.com" required>
+        </div>
+        <div class="form-field">
+          <label for="message">Project Details</label>
+          <textarea id="message" name="message"
+            placeholder="Tell me about your project, timeline, and goals…" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message →</button>
+      </form>
     </div>
   </section>
 
   <footer>
-    &copy; 2025 Ankush Mallick. All rights reserved.
+    &copy; 2025 Ankush Mallick &mdash; All rights reserved
   </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">✓ Message sent! I'll be in touch soon.</div>
 
   <script src="script.js"></script>
 </body>
