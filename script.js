@@ -30,15 +30,37 @@ window.addEventListener('scroll', () => {
 const contactForm = document.getElementById('contact-form');
 const toast = document.getElementById('toast');
 
-contactForm.addEventListener('submit', function (e) {
+contactForm.addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  toast.classList.add('show');
+  const formData = new FormData(contactForm);
 
-  // Auto-hide after 3.8 seconds
-  setTimeout(() => toast.classList.remove('show'), 3800);
+  try {
+    const res = await fetch(contactForm.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+      },
+    });
 
-  contactForm.reset();
+    if (!res.ok) {
+      throw new Error('Formspree request failed');
+    }
+
+    // success toast
+    toast.textContent = "✓ Message sent! I'll be in touch soon.";
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3800);
+
+    contactForm.reset();
+  } catch (err) {
+    console.error(err);
+    // error toast
+    toast.textContent = '⚠️ Something went wrong. Please try again.';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3800);
+  }
 });
 
 
