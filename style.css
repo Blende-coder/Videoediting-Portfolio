@@ -1,5 +1,10 @@
 /* ── CUSTOM CURSOR ───────────────────────────────────────── */
-body.has-custom-cursor {
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor .portfolio-item,
+body.has-custom-cursor input,
+body.has-custom-cursor textarea{
   cursor: none;
 }
 
@@ -21,6 +26,23 @@ body.has-custom-cursor {
     background 0.15s ease;
   mix-blend-mode: difference;
   z-index: 10000;
+}
+
+/* Clickable hover state (links, buttons, projects) */
+.custom-cursor.cursor-link {
+  width: 30px;
+  height: 30px;
+  border-color: var(--accent);
+  background: rgba(232, 201, 106, 0.12);
+}
+
+/* Text input state (typing) */
+.custom-cursor.cursor-text {
+  width: 3px;
+  height: 24px;
+  border-radius: 999px;
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 .custom-cursor.active {
