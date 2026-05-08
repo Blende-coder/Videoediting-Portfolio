@@ -26,6 +26,7 @@ window.addEventListener('scroll', () => {
 
 /* ── MARQUEE STRIP ───────────────────────────────────────── */
 .marquee {
+  position: relative;
   width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -33,14 +34,23 @@ window.addEventListener('scroll', () => {
   overflow: hidden;
   padding: 0.8em 0;
   margin-top: -1px;
+  white-space: nowrap;
 }
 
 .marquee-track {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-flex;
   gap: 3em;
-  white-space: nowrap;
+  min-width: 100%;
   will-change: transform;
-  animation: marqueeSlide 28s linear infinite;
+  animation: marqueeSlide 24s linear infinite;
+}
+
+.marquee-track:nth-child(2) {
+  /* start the second track immediately after the first */
+  transform: translate(100%, -50%);
 }
 
 .marquee span {
@@ -51,10 +61,13 @@ window.addEventListener('scroll', () => {
 }
 
 @keyframes marqueeSlide {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0) translateY(-50%);
+  }
+  to {
+    transform: translateX(-100%) translateY(-50%);
+  }
 }
-
 // ── Contact form submission ─────────────────────────────────
 // Shows a toast notification instead of a jarring alert()
 const contactForm = document.getElementById('contact-form');
