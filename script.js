@@ -1,3 +1,66 @@
+// ── Preloader – load images before reveal ──────────────────
+document.body.classList.add('preloading');
+
+const preloaderEl = document.getElementById('preloader');
+const preloaderBarFill = document.querySelector('.preloader-bar-fill');
+
+// collect image URLs from <img> tags
+const imgUrls = Array.from(document.images)
+  .map(img => img.src)
+  .filter(Boolean);
+
+// also include hero background image from CSS
+const headerEl = document.querySelector('header');
+if (headerEl) {
+  const bg = getComputedStyle(headerEl).backgroundImage;
+  const match = bg && bg.match(/url\\(\"?(.*?)\"?\\)/);
+  if (match && match[1]) {
+    imgUrls.push(match[1]);
+  }
+}
+
+const uniqueUrls = Array.from(new Set(imgUrls));
+let loadedCount = 0;
+
+function preloadImage(url) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = img.onerror = () => resolve();
+    img.src = url;
+  });
+}
+
+function updatePreloader() {
+  if (!uniqueUrls.length) {
+    preloaderBarFill.style.transform = 'scaleX(1)';
+    return;
+  }
+  const progress = loadedCount / uniqueUrls.length;
+  preloaderBarFill.style.transform = `scaleX(${progress})`;
+}
+
+const preloadPromise = Promise.all(
+  uniqueUrls.map(url =>
+    preloadImage(url).then(() => {
+      loadedCount += 1;
+      updatePreloader();
+    })
+  )
+);
+
+// safety timeout so user isn't stuck if something hangs
+const timeoutPromise = new Promise(resolve => {
+  setTimeout(resolve, 5000);
+});
+
+Promise.race([preloadPromise, timeoutPromise]).then(() => {
+  preloaderBarFill.style.transform = 'scaleX(1)';
+  setTimeout(() => {
+    preloaderEl.classList.add('done');
+    document.body.classList.remove('preloading');
+  }, 350);
+});
+
 // ── Scroll Reveal ──────────────────────────────────────────
 // Watches every .reveal element and adds .visible when it enters the viewport
 const revealEls = document.querySelectorAll('.reveal');
