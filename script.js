@@ -145,6 +145,7 @@ if (statNumbers.length) {
 }
 
 
+
 // ── Custom gold cursor ─────────────────────────────────────
 const customCursor = document.createElement('div');
 customCursor.className = 'custom-cursor';
@@ -211,3 +212,34 @@ function renderCursor() {
 }
 
 renderCursor();
+
+// ── Scroll orb parallax ────────────────────────────────────
+const scrollOrb = document.createElement('div');
+scrollOrb.className = 'scroll-orb';
+document.body.appendChild(scrollOrb);
+
+let orbTargetY = 0;
+let orbCurrentY = 0;
+
+function updateOrb() {
+  // scroll factor controls how much it drifts (0.1 = subtle)
+  const scrollY = window.scrollY || window.pageYOffset;
+  orbTargetY = scrollY * 0.12;
+
+  // smooth lerp so it eases behind scroll
+  orbCurrentY += (orbTargetY - orbCurrentY) * 0.15;
+  scrollOrb.style.transform = `translate3d(0, ${orbCurrentY}px, 0)`;
+
+  requestAnimationFrame(updateOrb);
+}
+
+updateOrb();
+
+// slightly boost opacity once user has scrolled a bit
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 120) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
+});
