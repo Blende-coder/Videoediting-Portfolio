@@ -24,6 +24,36 @@ window.addEventListener('scroll', () => {
     : 'rgba(13,14,16,0.75)';
 });
 
+/* ── MARQUEE STRIP ───────────────────────────────────────── */
+.marquee {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(circle at top, rgba(212, 168, 67, 0.04), transparent 55%);
+  overflow: hidden;
+  padding: 0.8em 0;
+  margin-top: -1px;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 3em;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marqueeSlide 28s linear infinite;
+}
+
+.marquee span {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(240, 236, 227, 0.6);
+}
+
+@keyframes marqueeSlide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
 // ── Contact form submission ─────────────────────────────────
 // Shows a toast notification instead of a jarring alert()
