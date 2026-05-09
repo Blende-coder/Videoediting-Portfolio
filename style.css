@@ -129,6 +129,21 @@ body.preloading {
   visibility: hidden;
 }
 
+.preloader-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.preloader-logo {
+  font-family: var(--display);
+  font-size: 2.4rem;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-shadow: 0 0 22px rgba(212, 168, 67, 0.7);
+}
 .preloader-bar {
   width: 220px;
   height: 2px;
@@ -150,6 +165,12 @@ body.preloading {
   transition: transform 0.3s ease-out;
 }
 
+.preloader-label {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(240, 236, 227, 0.6);
+}
 
 /* ── RESET ───────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
