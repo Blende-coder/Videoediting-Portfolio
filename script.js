@@ -30,12 +30,13 @@ window.addEventListener('load', () => {
 // Safety timeout so you never get stuck
 setTimeout(finishPreloader, 4000);
 
+
 // ── Scroll Reveal ──────────────────────────────────────────
 // Watches every .reveal element and adds .visible when it enters the viewport
 const revealEls = document.querySelectorAll('.reveal');
 
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
+  entries.forEach((e) => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
       observer.unobserve(e.target); // stop watching once revealed
@@ -43,7 +44,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-revealEls.forEach(el => observer.observe(el));
+revealEls.forEach((el) => observer.observe(el));
 
 
 // ── Nav background on scroll ────────────────────────────────
@@ -56,87 +57,43 @@ window.addEventListener('scroll', () => {
     : 'rgba(13,14,16,0.75)';
 });
 
-/* ── MARQUEE STRIP ───────────────────────────────────────── */
-.marquee {
-  position: relative;
-  width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: radial-gradient(circle at top, rgba(212, 168, 67, 0.04), transparent 55%);
-  overflow: hidden;
-  padding: 0.8em 0;
-  margin-top: -1px;
-  white-space: nowrap;
-}
 
-.marquee-track {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-flex;
-  gap: 3em;
-  min-width: 100%;
-  will-change: transform;
-  animation: marqueeSlide 24s linear infinite;
-}
-
-.marquee-track:nth-child(2) {
-  /* start the second track immediately after the first */
-  transform: translate(100%, -50%);
-}
-
-.marquee span {
-  font-size: 0.75rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(240, 236, 227, 0.6);
-}
-
-@keyframes marqueeSlide {
-  from {
-    transform: translateX(0) translateY(-50%);
-  }
-  to {
-    transform: translateX(-100%) translateY(-50%);
-  }
-}
-// ── Contact form submission ─────────────────────────────────
-// Shows a toast notification instead of a jarring alert()
+// ── Contact form submission (Formspree) ─────────────────────
 const contactForm = document.getElementById('contact-form');
 const toast = document.getElementById('toast');
 
-contactForm.addEventListener('submit', async function (e) {
-  e.preventDefault();
+if (contactForm && toast) {
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-  const formData = new FormData(contactForm);
+    const formData = new FormData(contactForm);
 
-  try {
-    const res = await fetch(contactForm.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Accept: 'application/json',
-      },
-    });
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
 
-    if (!res.ok) {
-      throw new Error('Formspree request failed');
+      if (!res.ok) {
+        throw new Error('Formspree request failed');
+      }
+
+      toast.textContent = "✓ Message sent! I'll be in touch soon.";
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
+
+      contactForm.reset();
+    } catch (err) {
+      console.error(err);
+      toast.textContent = '⚠️ Something went wrong. Please try again.';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
     }
-
-    // success toast
-    toast.textContent = "✓ Message sent! I'll be in touch soon.";
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3800);
-
-    contactForm.reset();
-  } catch (err) {
-    console.error(err);
-    // error toast
-    toast.textContent = '⚠️ Something went wrong. Please try again.';
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3800);
-  }
-});
+  });
+}
 
 
 // ── Hero floating particles ────────────────────────────────
@@ -146,7 +103,9 @@ if (heroCanvas) {
   const ctx = heroCanvas.getContext('2d');
   const particles = [];
   const PARTICLE_COUNT = 60;
-  let width, height, dpr;
+  let width;
+  let height;
+  let dpr;
 
   function resizeCanvas() {
     dpr = window.devicePixelRatio || 1;
@@ -158,14 +117,14 @@ if (heroCanvas) {
 
   function createParticles() {
     particles.length = 0;
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i += 1) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
         r: 0.8 + Math.random() * 1.4,
         alpha: 0.25 + Math.random() * 0.35,
         vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25
+        vy: (Math.random() - 0.5) * 0.25,
       });
     }
   }
@@ -176,7 +135,7 @@ if (heroCanvas) {
     ctx.globalCompositeOperation = 'lighter';
     ctx.fillStyle = '#d4a843';
 
-    particles.forEach(p => {
+    particles.forEach((p) => {
       p.x += p.vx;
       p.y += p.vy;
 
@@ -211,7 +170,7 @@ const statNumbers = document.querySelectorAll('.stat-number');
 
 if (statNumbers.length) {
   const statsObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
 
       const el = entry.target;
@@ -238,9 +197,8 @@ if (statNumbers.length) {
     });
   }, { threshold: 0.4 });
 
-  statNumbers.forEach(num => statsObserver.observe(num));
+  statNumbers.forEach((num) => statsObserver.observe(num));
 }
-
 
 
 // ── Custom gold cursor ─────────────────────────────────────
@@ -256,7 +214,6 @@ let cursorY = window.innerHeight / 2;
 let targetX = cursorX;
 let targetY = cursorY;
 
-// State helpers so classes don't stack weirdly
 function setCursorDefault() {
   customCursor.classList.remove('cursor-link', 'cursor-text');
 }
@@ -273,19 +230,18 @@ function setCursorText() {
 
 // Clickable things: links, buttons, portfolio cards
 const clickableEls = document.querySelectorAll('a, button, .portfolio-item, .submit-btn');
-clickableEls.forEach(el => {
+clickableEls.forEach((el) => {
   el.addEventListener('mouseenter', setCursorLink);
   el.addEventListener('mouseleave', setCursorDefault);
 });
 
 // Text inputs: input + textarea
 const textEls = document.querySelectorAll('input, textarea');
-textEls.forEach(el => {
+textEls.forEach((el) => {
   el.addEventListener('mouseenter', setCursorText);
   el.addEventListener('mouseleave', setCursorDefault);
 });
 
-// existing move / mousedown / mouseup / renderCursor stay the same
 window.addEventListener('mousemove', (e) => {
   targetX = e.clientX;
   targetY = e.clientY;
@@ -303,12 +259,12 @@ function renderCursor() {
   const lerpFactor = 0.22;
   cursorX += (targetX - cursorX) * lerpFactor;
   cursorY += (targetY - cursorY) * lerpFactor;
-  customCursor.style.transform =
-    `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+  customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
   requestAnimationFrame(renderCursor);
 }
 
 renderCursor();
+
 
 // ── Scroll film strip progress ─────────────────────────────
 const scrollStrip = document.createElement('div');
