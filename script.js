@@ -1,88 +1,34 @@
-// ── Preloader – load images then fade out ───────────────────
+// ── Simple preloader – fade out on load / timeout ───────────
 document.body.classList.add('preloading');
 
 const preloaderEl = document.getElementById('preloader');
 const preloaderBarFill = document.querySelector('.preloader-bar-fill');
 
+let preloaderDone = false;
+
 function finishPreloader() {
-  if (!preloaderEl) return;
+  if (preloaderDone) return;
+  preloaderDone = true;
 
   if (preloaderBarFill) {
     preloaderBarFill.style.transform = 'scaleX(1)';
   }
 
   setTimeout(() => {
-    preloaderEl.classList.add('done');
+    if (preloaderEl) {
+      preloaderEl.classList.add('done');
+    }
     document.body.classList.remove('preloading');
   }, 400);
 }
 
-// Collect image URLs from <img> tags
-const imgNodes = Array.from(document.images);
-const imgUrls = imgNodes
-  .map(img => img.currentSrc || img.src)
-  .filter(Boolean);
-
-// Include hero background image from CSS if present
-try {
-  const headerEl = document.querySelector('header');
-  if (headerEl) {
-    const bg = getComputedStyle(headerEl).backgroundImage;
-    const match = bg && bg.match(/url\\(\"?(.*?)\"?\\)/);
-    if (match && match[1]) {
-      imgUrls.push(match[1]);
-    }
-  }
-} catch (e) {
-  console.warn('Hero bg lookup failed', e);
-}
-
-const uniqueUrls = Array.from(new Set(imgUrls));
-let loadedCount = 0;
-
-function preloadImage(url) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = img.onerror = () => resolve();
-    img.src = url;
-  });
-}
-
-function updatePreloaderBar() {
-  if (!preloaderBarFill || !uniqueUrls.length) return;
-  const progress = loadedCount / uniqueUrls.length;
-  preloaderBarFill.style.transform = `scaleX(${progress})`;
-}
-
-let preloadPromise;
-if (uniqueUrls.length) {
-  preloadPromise = Promise.all(
-    uniqueUrls.map(url =>
-      preloadImage(url).then(() => {
-        loadedCount += 1;
-        updatePreloaderBar();
-      })
-    )
-  );
-} else {
-  preloadPromise = Promise.resolve();
-}
-
-// Safety timeout so user never gets stuck
-const timeoutPromise = new Promise(resolve => setTimeout(resolve, 5000));
-
-// Also listen for full window load as a backup
-const loadPromise = new Promise(resolve => {
-  window.addEventListener('load', resolve, { once: true });
+// When everything is loaded (images, etc.)
+window.addEventListener('load', () => {
+  finishPreloader();
 });
 
-Promise.race([preloadPromise, timeoutPromise, loadPromise])
-  .then(finishPreloader)
-  .catch(err => {
-    console.error('Preloader error', err);
-    finishPreloader();
-  });
-
+// Safety timeout so you never get stuck
+setTimeout(finishPreloader, 4000);
 
 // ── Scroll Reveal ──────────────────────────────────────────
 // Watches every .reveal element and adds .visible when it enters the viewport
