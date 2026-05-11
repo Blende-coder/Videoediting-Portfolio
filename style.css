@@ -604,6 +604,7 @@ form { display: flex; flex-direction: column; gap: 1em; }
   flex-wrap: wrap;
   gap: 0.6em 1.4em;
   align-items: center;
+  justify-content: center; /* nicer centering on desktop */
 }
 
 .specialty-tag {
@@ -617,12 +618,28 @@ form { display: flex; flex-direction: column; gap: 1em; }
   background: rgba(12, 13, 16, 0.9);
 }
 
-/* small responsive tweak */
-@media (max-width: 860px) {
+/* Tablet / mobile: turn into a horizontal scroll row */
+@media (max-width: 900px) {
   .specialties-inner {
     padding: 0 1.5em;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 0.8em;
+    scrollbar-width: none;
+  }
+
+  .specialties-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .specialty-tag {
+    white-space: nowrap;
+    font-size: 0.68rem;
+    padding: 0.3em 0.8em;
   }
 }
+
 /* ── STATS ───────────────────────────────────────────────── */
 .stats {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
