@@ -202,69 +202,88 @@ if (statNumbers.length) {
 
 
 // ── Custom gold cursor ─────────────────────────────────────
-const customCursor = document.createElement('div');
-customCursor.className = 'custom-cursor';
-document.body.appendChild(customCursor);
+const finePointerQuery = window.matchMedia
+  ? window.matchMedia('(pointer: fine)')
+  : null;
 
-// tell CSS it's safe to hide the native cursor
-document.body.classList.add('has-custom-cursor');
+function initCustomCursor() {
+  const customCursor = document.createElement('div');
+  customCursor.className = 'custom-cursor';
+  document.body.appendChild(customCursor);
 
-let cursorX = window.innerWidth / 2;
-let cursorY = window.innerHeight / 2;
-let targetX = cursorX;
-let targetY = cursorY;
+  document.body.classList.add('has-custom-cursor');
 
-function setCursorDefault() {
-  customCursor.classList.remove('cursor-link', 'cursor-text');
+  let cursorX = window.innerWidth / 2;
+  let cursorY = window.innerHeight / 2;
+  let targetX = cursorX;
+  let targetY = cursorY;
+
+  function setCursorDefault() {
+    customCursor.classList.remove('cursor-link', 'cursor-text');
+  }
+
+  function setCursorLink() {
+    customCursor.classList.add('cursor-link');
+    customCursor.classList.remove('cursor-text');
+  }
+
+  function setCursorText() {
+    customCursor.classList.add('cursor-text');
+    customCursor.classList.remove('cursor-link');
+  }
+
+  const clickableEls = document.querySelectorAll('a, button, .portfolio-item, .submit-btn');
+  clickableEls.forEach((el) => {
+    el.addEventListener('mouseenter', setCursorLink);
+    el.addEventListener('mouseleave', setCursorDefault);
+  });
+
+  const textEls = document.querySelectorAll('input, textarea');
+  textEls.forEach((el) => {
+    el.addEventListener('mouseenter', setCursorText);
+    el.addEventListener('mouseleave', setCursorDefault);
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
+
+  window.addEventListener('mousedown', () => {
+    customCursor.classList.add('active');
+  });
+
+  window.addEventListener('mouseup', () => {
+    customCursor.classList.remove('active');
+  });
+
+  function renderCursor() {
+    const lerpFactor = 0.22;
+    cursorX += (targetX - cursorX) * lerpFactor;
+    cursorY += (targetY - cursorY) * lerpFactor;
+    customCursor.style.transform =
+      `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(renderCursor);
+  }
+
+  renderCursor();
 }
 
-function setCursorLink() {
-  customCursor.classList.add('cursor-link');
-  customCursor.classList.remove('cursor-text');
+// Only enable custom cursor if device has a fine pointer (mouse/trackpad)
+if (finePointerQuery ? finePointerQuery.matches : true) {
+  initCustomCursor();
 }
 
-function setCursorText() {
-  customCursor.classList.add('cursor-text');
-  customCursor.classList.remove('cursor-link');
+if (finePointerQuery && finePointerQuery.addEventListener) {
+  finePointerQuery.addEventListener('change', (e) => {
+    if (e.matches) {
+      // pointer became fine (e.g. mouse plugged in) – init once
+      if (!document.body.classList.contains('has-custom-cursor')) {
+        initCustomCursor();
+      }
+    }
+  });
 }
-
-// Clickable things: links, buttons, portfolio cards
-const clickableEls = document.querySelectorAll('a, button, .portfolio-item, .submit-btn');
-clickableEls.forEach((el) => {
-  el.addEventListener('mouseenter', setCursorLink);
-  el.addEventListener('mouseleave', setCursorDefault);
-});
-
-// Text inputs: input + textarea
-const textEls = document.querySelectorAll('input, textarea');
-textEls.forEach((el) => {
-  el.addEventListener('mouseenter', setCursorText);
-  el.addEventListener('mouseleave', setCursorDefault);
-});
-
-window.addEventListener('mousemove', (e) => {
-  targetX = e.clientX;
-  targetY = e.clientY;
-});
-
-window.addEventListener('mousedown', () => {
-  customCursor.classList.add('active');
-});
-
-window.addEventListener('mouseup', () => {
-  customCursor.classList.remove('active');
-});
-
-function renderCursor() {
-  const lerpFactor = 0.22;
-  cursorX += (targetX - cursorX) * lerpFactor;
-  cursorY += (targetY - cursorY) * lerpFactor;
-  customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
-  requestAnimationFrame(renderCursor);
-}
-
-renderCursor();
-
 
 // ── Scroll film strip progress ─────────────────────────────
 const scrollStrip = document.createElement('div');
