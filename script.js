@@ -246,11 +246,7 @@ if (statNumbers.length) {
 }
 
 
-// ── Custom gold cursor ─────────────────────────────────────
-const finePointerQuery = window.matchMedia
-  ? window.matchMedia('(pointer: fine)')
-  : null;
-
+/* ── Custom gold cursor ───────────────────────────────────── */
 function initCustomCursor() {
   const customCursor = document.createElement('div');
   customCursor.className = 'custom-cursor';
@@ -258,10 +254,22 @@ function initCustomCursor() {
 
   document.body.classList.add('has-custom-cursor');
 
-  let cursorX = window.innerWidth / 2;
-  let cursorY = window.innerHeight / 2;
-  let targetX = cursorX;
-  let targetY = cursorY;
+  // Show the cursor only when the mouse moves over the document
+  document.addEventListener('mousemove', (e) => {
+    customCursor.style.opacity = '1';
+    customCursor.style.left = e.clientX + 'px';
+    customCursor.style.top = e.clientY + 'px';
+  });
+
+  // Hide the cursor when the mouse leaves the website window
+  document.addEventListener('mouseleave', () => {
+    customCursor.style.opacity = '0';
+  });
+
+  // Re-show the cursor if the mouse re-enters
+  document.addEventListener('mouseenter', () => {
+    customCursor.style.opacity = '1';
+  });
 
   function setCursorDefault() {
     customCursor.classList.remove('cursor-link', 'cursor-text');
@@ -277,41 +285,24 @@ function initCustomCursor() {
     customCursor.classList.remove('cursor-link');
   }
 
+  // Attach hover states to links, buttons, and portfolio items
   const clickableEls = document.querySelectorAll('a, button, .portfolio-item, .submit-btn');
   clickableEls.forEach((el) => {
     el.addEventListener('mouseenter', setCursorLink);
     el.addEventListener('mouseleave', setCursorDefault);
   });
 
-  const textEls = document.querySelectorAll('input, textarea');
-  textEls.forEach((el) => {
+  // Attach the vertical line text cursor to form inputs and textareas
+  const textInputs = document.querySelectorAll('input, textarea');
+  textInputs.forEach((el) => {
     el.addEventListener('mouseenter', setCursorText);
     el.addEventListener('mouseleave', setCursorDefault);
   });
+}
 
-  window.addEventListener('mousemove', (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
-  });
-
-  window.addEventListener('mousedown', () => {
-    customCursor.classList.add('active');
-  });
-
-  window.addEventListener('mouseup', () => {
-    customCursor.classList.remove('active');
-  });
-
-  function renderCursor() {
-    const lerpFactor = 0.22;
-    cursorX += (targetX - cursorX) * lerpFactor;
-    cursorY += (targetY - cursorY) * lerpFactor;
-    customCursor.style.transform =
-      `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
-    requestAnimationFrame(renderCursor);
-  }
-
-  renderCursor();
+// Initialize the cursor
+if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+  initCustomCursor();
 }
 
 // Only enable custom cursor if device has a fine pointer (mouse/trackpad)
