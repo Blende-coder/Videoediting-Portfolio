@@ -3,9 +3,9 @@
   --bg:        #0d0e10;
   --bg2:       #131519;
   --bg3:       #1a1c21;
-  --primary:   #d4a843; /* Deep Gold */
+  --primary:   #d4a843; 
   --primary-dim:#9a7730;
-  --accent:    #e8c96a; /* Bright Gold */
+  --accent:    #e8c96a; 
   --accent-dim:#c29d38;
   --white:     #f0ece3;
   --muted:     #7a7870;
@@ -213,6 +213,74 @@ form { display: flex; flex-direction: column; gap: 1.5em; }
 .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--primary-dim); box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.08); }
 .submit-btn { padding: 1em 3em; background: var(--primary); color: var(--bg); border: none; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: 0.3s; }
 .submit-btn:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 168, 67, 0.3); }
+
+/* ── TESTIMONIALS ─────────────────────────────────────────── */
+#testimonials { 
+  border-top: 1px solid rgba(212, 168, 67, 0.15); 
+  /* This adds your background image, darkened so text remains readable */
+  background: linear-gradient(rgba(13, 14, 16, 0.92), rgba(13, 14, 16, 0.95)), url('assets/hero-bg.jpg') center/cover no-repeat;
+  background-attachment: fixed; /* Creates a premium parallax scrolling effect */
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5em;
+  margin-top: 1em;
+}
+
+/* The themed box for the comments */
+blockquote {
+  background: var(--bg3);
+  border-left: 3px solid var(--primary);
+  padding: 2.5em 2em;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+blockquote:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* The large decorative golden quote mark inside the box */
+blockquote::before {
+  content: '\201C';
+  font-family: var(--serif);
+  font-size: 8em;
+  color: rgba(212, 168, 67, 0.08);
+  position: absolute; 
+  top: -0.15em; 
+  left: 0.1em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+blockquote p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(240, 236, 227, 0.85);
+  position: relative; 
+  z-index: 1;
+}
+
+cite {
+  display: block; 
+  margin-top: 1.5em;
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
 
 /* ── REVEAL ANIMATIONS ────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
