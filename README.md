@@ -1,4 +1,4 @@
-# Video Editing Portfolio – Ankush Mallick
+# Video Editing Portfolio – Blende
 
 A cinematic, single-page portfolio site for **Ankush Mallick**, a video editor based in India, showcasing commercial work, social content, and testimonials in a high-contrast, gold-on-black aesthetic.[file:1][file:3]
 
