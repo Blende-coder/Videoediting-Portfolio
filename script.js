@@ -300,25 +300,9 @@ function initCustomCursor() {
   });
 }
 
-// Initialize the cursor
+// Initialize the cursor only if the device has a fine pointer (mouse/trackpad)
 if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
   initCustomCursor();
-}
-
-// Only enable custom cursor if device has a fine pointer (mouse/trackpad)
-if (finePointerQuery ? finePointerQuery.matches : true) {
-  initCustomCursor();
-}
-
-if (finePointerQuery && finePointerQuery.addEventListener) {
-  finePointerQuery.addEventListener('change', (e) => {
-    if (e.matches) {
-      // pointer became fine (e.g. mouse plugged in) – init once
-      if (!document.body.classList.contains('has-custom-cursor')) {
-        initCustomCursor();
-      }
-    }
-  });
 }
 
 // ── Scroll film strip progress ─────────────────────────────
